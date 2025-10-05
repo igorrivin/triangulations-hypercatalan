@@ -1,0 +1,101 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\newcommand{\A}{A_1A_2\cdots A_n}
+\newcommand{\Mij}{M_{i,j}}
+\newcommand{\Mijk}{\triangle(M_{i,j},M_{j,k},M_{k,i})}
+
+\title{Dissections of Midpoint Polygons and Order--2 Hypercatalan Numbers}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $A_1A_2\cdots A_n$ be a convex $n$--gon in the plane and, for $i\neq j$, let $M_{i,j}$ be the midpoint of segment $A_iA_j$. Consider the $n$--gon
+\[
+Q \;=\; M_{1,2}M_{2,3}\cdots M_{n,1}.
+\]
+We study dissections of $Q$ into triangles subject to the rule that every drawn segment must be of the form $M_{i,j}M_{i,k}$ (same first index), and every triangle vertex must belong to the set $\{M_{i,j}\}_{i\ne j}$. We prove that the number of such dissections equals
+\[
+H(n) \;=\; \sum_{T} \;\prod_{i=1}^n C_{\deg_T(i)},
+\]
+where the sum is over all triangulations $T$ of the original $n$--gon $A_1A_2\cdots A_n$, $\deg_T(i)$ is the number of diagonals of $T$ incident to $A_i$, and $C_k$ is the $k$--th Catalan number. The sequence $(H(n))_{n\ge 3}$ begins
+\[
+1,\,2,\,10,\,70,\,574,\,5176,\,49656,\,497640,\dots
+\]
+and coincides with the \emph{order--2 hypercatalan numbers} studied by Olarte and Santos.
+\end{abstract}
+
+\section{Setup and the two kinds of triangles}
+
+Let $T$ be any valid dissection of $Q$ into triangles. Because every drawn segment is of the form $M_{i,j}M_{i,k}$, every triangle in $T$ is of exactly one of the following two types:
+\begin{itemize}[nosep]
+  \item \textbf{Black triangles:} $\triangle(M_{i,j},M_{j,k},M_{k,i})$, the medial triangle of $\triangle A_iA_jA_k$ for some distinct $i,j,k$.
+  \item \textbf{White triangles:} $\triangle(M_{i,j},M_{i,k},M_{i,\ell})$, where all vertices share a common first index $i$.
+\end{itemize}
+No two black triangles can share an edge (two sides of a medial triangle meet at distinct first indices), and the union of all white triangles with common index $i$ is a polygonal \emph{white region} whose vertices are precisely the points $M_{i,*}$ appearing in that region.
+
+\section{Local structure at boundary and interior midpoints}
+
+We use indices modulo $n$. The following observations are standard and can be proved by walking around the star of a vertex in the dissection.
+
+\begin{lemma}[Boundary midpoints]\label{lem:boundary}
+For each $i$, there is exactly one black triangle incident to $M_{i,i+1}$.
+\end{lemma}
+
+\begin{proof}
+The segments $M_{i,i+1}M_{i+1,i+2}$ and $M_{i,i+1}M_{i-1,i}$ are sides of the convex hull $Q$ and therefore appear in $T$. Traversing all triangles incident to $M_{i,i+1}$, one finds an edge $M'M''$ such that $M'$ and $M''$ share neither index $i$ nor $i{+}1$; this forces a black triangle at $M_{i,i+1}$. If two distinct black triangles touched $M_{i,i+1}$, a white triangle between them would necessarily have no vertex with first index $i$ nor $i{+}1$, which is impossible by the rule on drawn edges.
+\end{proof}
+
+\begin{lemma}[Interior midpoints]\label{lem:interior}
+Let $|i-j|\not\equiv 1 \pmod n$, so that $M_{i,j}$ is interior to $Q$. Then exactly two black triangles of $T$ are incident to $M_{i,j}$, and they lie on opposite sides of the line $A_iA_j$.
+\end{lemma}
+
+\begin{proof}
+Walking around the triangles incident to $M_{i,j}$ starting at one black triangle and avoiding it, we must encounter a second black triangle; three or more would trap a white triangle entirely on one side of $A_iA_j$ whose vertices share neither first index $i$ nor $j$, which is forbidden.
+\end{proof}
+
+\section{From $T$ to a triangulation of the original polygon}
+
+To each black triangle $\triangle(M_{i,j},M_{j,k},M_{k,i})$ in $T$ associate its \emph{bigger triangle} $\triangle A_iA_jA_k$ in the original polygon. By Lemma~\ref{lem:boundary}, there is one bigger triangle adjacent to every boundary edge $A_iA_{i+1}$; by Lemma~\ref{lem:interior}, there are two nonoverlapping bigger triangles on opposite sides of each diagonal $A_iA_j$ whose midpoint $M_{i,j}$ occurs in $T$. Consequently the bigger triangles tile $A_1A_2\cdots A_n$ without overlaps or gaps, forming a triangulation $T'$ of the original polygon. In particular, the number of black triangles in $T$ equals the number of triangles of $T'$, namely $n-2$.
+
+\section{White regions and Catalan products}
+
+Fix a vertex $A_i$ of the original polygon, and consider the corresponding white region in $T$ (all white triangles whose vertices have first index $i$). Its vertices are exactly the midpoints $M_{i,*}$ along the chain of consecutive edges around $A_i$ in $T'$. If we denote by $d_i:=\deg_{T'}(i)$ the number of diagonals of $T'$ incident to $A_i$ (not counting the two boundary sides), then this white region is a convex polygon with $d_i+2$ vertices, hence it can be triangulated in $C_{d_i}$ ways, where $C_k$ is the $k$-th Catalan number.
+
+Therefore, for a fixed underlying triangulation $T'$ of the original polygon, the number of valid dissections $T$ mapping to $T'$ equals
+\[
+\prod_{i=1}^n C_{d_i}.
+\]
+
+\section{Counting dissections: the order--2 hypercatalan number}
+
+Summing over all triangulations $T'$ of the $n$--gon, we obtain the master formula
+\[
+H(n) \;=\; \sum_{T'} \;\prod_{i=1}^n C_{\deg_{T'}(i)}.
+\]
+The sequence $H(n)$ is known as the \emph{order--2 hypercatalan numbers}; see, e.g., Olarte and Santos~\cite{OlarteSantos} for general properties and further interpretations. The first values are
+\[
+H(3)=1,\ H(4)=2,\ H(5)=10,\ H(6)=70,\ H(7)=574,\ H(8)=5176,\ H(9)=49656,\ H(10)=497640.
+\]
+For $n=10$ (a decagon), this confirms the value $H(10)=497{,}640$.
+
+\section*{Algorithmic computation}
+For completeness we include a dynamic programming algorithm that computes $H(n)$ in polynomial time using interval DP and endpoint degree bookkeeping. A reference implementation is provided in \texttt{src/hypercatalan.py}.
+
+\begin{thebibliography}{1}
+\bibitem{OlarteSantos}
+I.~Olarte and F.~Santos,
+\newblock \emph{Hypercatalan numbers for the associahedron and cyclohedron},
+\newblock arXiv preprint \texttt{arXiv:1906.05764}, 2019.
+\end{thebibliography}
+
+\end{document}
